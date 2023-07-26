@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "python-project-template"
+version = "0.1.0"
+description = "A pltform and tool agnostic python project template built with cookiecutter."
+authors = ["chuanhao01 <34702921+chuanhao01@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "python_project_template"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+cookiecutter = "^2.2.3"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+mypy = "^1.4.1"
+pylint = "^2.17.4"
+coverage = "^7.2.7"
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+pyupgrade = "^3.9.0"
+pydocstyle = "^6.3.0"
+mypy-extensions = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
