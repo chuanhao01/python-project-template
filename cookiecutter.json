@@ -1,0 +1,10 @@
+{
+  "project_name": "python-project",
+  "project_description": "`{{ cookiecutter.project_name.lower().replace(' ', '-') }}` is a Python cli/package.",
+  "organization": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+  "license": ["MIT", "BSD-3", "GNU GPL v3.0", "Apache Software License 2.0"],
+  "python_version": ["3.8", "3.9", "3.10", "3.11"],
+  "author_name": "",
+  "author_email": "",
+  "line_length": 100
+}
