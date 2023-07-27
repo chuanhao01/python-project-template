@@ -3,11 +3,8 @@
 import re
 import sys
 
-PROJECT_NAME = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
-LINE_LENGTH_PARAMETER = "{{ cookiecutter.line_length }}"
-
-
-MODULE_REGEX = re.compile(r"^[a-z][a-z0-9\-\_]+[a-z0-9]$")
+PROJECT_NAME: str = "{{ cookiecutter.project_name }}"
+LINE_LENGTH_PARAMETER: str = "{{ cookiecutter.line_length }}"
 
 
 def validate_project_name(project_name: str) -> None:
@@ -22,7 +19,8 @@ def validate_project_name(project_name: str) -> None:
     Raises:
         ValueError: If project_name is not a valid Python module name
     """
-    if MODULE_REGEX.fullmatch(project_name) is None:
+    module_regex = re.compile(r"^([a-z]|[a-z][a-z0-9_-]*[a-z0-9])$")
+    if module_regex.fullmatch(project_name) is None:
         message = f"ERROR: The project name `{project_name}` is not a valid Python module name."
         raise ValueError(message)
 
