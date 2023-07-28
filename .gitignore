@@ -1,6 +1,10 @@
-# ---.editor gitignore
+# --- editor based gitignore
 # vscode
 .taplo.toml
+.vscode
+
+# Make sure to include .additional
+!.additional/**/*
 
 # --- Python gitignore
 # Byte-compiled / optimized / DLL files
