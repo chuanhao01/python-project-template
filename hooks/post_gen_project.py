@@ -1,5 +1,4 @@
 """This module is called after project is created."""
-from typing import List
 
 import textwrap
 from pathlib import Path
@@ -7,18 +6,11 @@ from shutil import move, rmtree
 
 # Project root directory
 PROJECT_DIRECTORY = Path.cwd().absolute()
-PROJECT_NAME = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
-PROJECT_MODULE = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
+PROJECT_NAME = "{{ cookiecutter.project_name }}"
+PROJECT_MODULE = "{{ cookiecutter.project_name.replace('-', '_') }}"
 
 # Values to generate correct license
 LICENSE = "{{ cookiecutter.license }}"
-
-licences_dict = {
-    "MIT": "mit",
-    "BSD-3": "bsd3",
-    "GNU GPL v3.0": "gpl3",
-    "Apache Software License 2.0": "apache",
-}
 
 
 def generate_license(directory: Path, licence: str) -> None:
@@ -28,25 +20,14 @@ def generate_license(directory: Path, licence: str) -> None:
         directory: path to the project directory
         licence: chosen licence
     """
-    move(str(directory / "_licences" / f"{licence}.txt"), str(directory / "LICENSE"))
-    rmtree(str(directory / "_licences"))
-
-
-def remove_unused_files(directory: Path, module_name: str) -> None:
-    """Remove unused files.
-
-    Args:
-        directory: path to the project directory
-        module_name: project module name
-        need_to_remove_cli: flag for removing CLI related files
-    """
-    files_to_delete: list[Path] = []
-
-    def _cli_specific_files() -> list[Path]:
-        return [directory / module_name / "__main__.py"]
-
-    for path in files_to_delete:
-        path.unlink()
+    licences_dict = {
+        "MIT": "mit",
+        "BSD-3": "bsd3",
+        "GNU GPL v3.0": "gpl3",
+        "Apache Software License 2.0": "apache",
+    }
+    move(str(directory / "_license" / f"{licences_dict[licence]}.txt"), str(directory / "LICENSE"))
+    rmtree(str(directory / "_license"))
 
 
 def print_futher_instuctions(project_name: str) -> None:
