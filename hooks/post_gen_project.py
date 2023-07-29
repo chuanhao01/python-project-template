@@ -26,8 +26,8 @@ def generate_license(directory: Path, licence: str) -> None:
         "GNU GPL v3.0": "gpl3",
         "Apache Software License 2.0": "apache",
     }
-    move(str(directory / "_license" / f"{licences_dict[licence]}.txt"), str(directory / "LICENSE"))
-    rmtree(str(directory / "_license"))
+    move(str(directory / "_licenses" / f"{licences_dict[licence]}.txt"), str(directory / "LICENSE"))
+    rmtree(str(directory / "_licenses"))
 
 
 def print_futher_instuctions(project_name: str) -> None:
@@ -61,8 +61,9 @@ def print_futher_instuctions(project_name: str) -> None:
 
 
 def main() -> None:
-    pass
+    generate_license(PROJECT_DIRECTORY, LICENSE)
 
 
+# Ran by the cookiecutter script
 if __name__ == "__main__":
     main()
