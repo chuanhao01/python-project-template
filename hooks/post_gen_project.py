@@ -27,7 +27,7 @@ def generate_license(project_path: Path, licence: str) -> None:
         "Apache Software License 2.0": "apache",
     }
     move(
-        (project_path / "_template" / "_licenses" / f"{licences_dict[licence]}.txt").as_posix(),
+        (project_path / "_template" / "licenses" / f"{licences_dict[licence]}.txt").as_posix(),
         (project_path / "LICENSE").as_posix(),
     )
 
