@@ -21,7 +21,9 @@ class TestCookiecutterGeneration:
 
         # LICENSE file generated correctly
         assert (project_folder_path / "LICENSE").exists()
-        assert not (project_folder_path / "_licenses").exists()
+
+        # _template folder cleaned up
+        assert not (project_folder_path / "_template").exists()
 
     def test_invalid_project_name(self, tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
         with pytest.raises(FailedHookException):
