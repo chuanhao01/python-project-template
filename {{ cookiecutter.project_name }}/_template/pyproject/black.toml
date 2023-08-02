@@ -1,0 +1,21 @@
+[tool.black]
+# https://github.com/psf/black
+target-version = ["py{{ cookiecutter.python_version.replace('.', '') }}"]
+line-length = {{ cookiecutter.line_length }}
+color = true
+
+exclude = '''
+/(
+    \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | env
+    | venv
+)/
+'''

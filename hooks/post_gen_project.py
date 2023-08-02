@@ -32,7 +32,13 @@ def generate_license(project_path: Path, licence: str) -> None:
     )
 
 
-# def generate_pyproject()
+def generate_pyproject(project_path: Path)
+    """Cleans up and removes the _template folder
+
+    Args:
+        project_path: path to the project root directory
+    """
+
 
 
 def clean_up_template(project_path: Path) -> None:
