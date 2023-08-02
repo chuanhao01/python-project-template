@@ -5,7 +5,7 @@ from pathlib import Path
 from shutil import move, rmtree
 
 # Project root directory
-PROJECT_DIRECTORY = Path.cwd().absolute()
+PROJECT_PATH = Path.cwd().absolute()
 PROJECT_NAME = "{{ cookiecutter.project_name }}"
 PROJECT_MODULE = "{{ cookiecutter.project_name.replace('-', '_') }}"
 
@@ -13,11 +13,11 @@ PROJECT_MODULE = "{{ cookiecutter.project_name.replace('-', '_') }}"
 LICENSE = "{{ cookiecutter.license }}"
 
 
-def generate_license(directory: Path, licence: str) -> None:
+def generate_license(project_path: Path, licence: str) -> None:
     """Generate license file for the project.
 
     Args:
-        directory: path to the project directory
+        project_path: path to the project root directory
         licence: chosen licence
     """
     licences_dict = {
@@ -26,8 +26,22 @@ def generate_license(directory: Path, licence: str) -> None:
         "GNU GPL v3.0": "gpl3",
         "Apache Software License 2.0": "apache",
     }
-    move(str(directory / "_licenses" / f"{licences_dict[licence]}.txt"), str(directory / "LICENSE"))
-    rmtree(str(directory / "_licenses"))
+    move(
+        (project_path / "_template" / "_licenses" / f"{licences_dict[licence]}.txt").as_posix(),
+        (project_path / "LICENSE").as_posix(),
+    )
+
+
+# def generate_pyproject()
+
+
+def clean_up_template(project_path: Path) -> None:
+    """Cleans up and removes the _template folder
+
+    Args:
+        project_path: path to the project root directory
+    """
+    rmtree((project_path / "_template").as_posix())
 
 
 def print_futher_instuctions(project_name: str) -> None:
@@ -61,7 +75,8 @@ def print_futher_instuctions(project_name: str) -> None:
 
 
 def main() -> None:
-    generate_license(PROJECT_DIRECTORY, LICENSE)
+    generate_license(PROJECT_PATH, LICENSE)
+    clean_up_template(PROJECT_PATH)
 
 
 # Ran by the cookiecutter script
