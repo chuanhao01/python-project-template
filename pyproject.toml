@@ -24,6 +24,7 @@ mypy-extensions = "^1.0.0"
 pre-commit = "^3.3.3"
 bandit = "^1.7.5"
 coverage-badge = "^1.1.0"
+pytest-html = "^3.2.0"
 
 [build-system]
 requires = ["poetry-core"]
