@@ -36,7 +36,7 @@ class TestCookiecutterGeneration:
         # _template folder cleaned up
         assert not (project_folder_path / "_template").exists()
 
-    def test_invalid_project(self, tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
+    def test_invalid_project(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
         with pytest.raises(FailedHookException):
             cookiecutter(
                 template=Path.cwd().absolute().as_posix(),
