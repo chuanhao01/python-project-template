@@ -14,9 +14,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: format
-        name: format
-        entry: make format
+      - id: check-code
+        name: check-code
+        entry: make check-code
         exclude: ^{{ cookiecutter.project_name }}/
         types: [python]
         language: system
