@@ -34,6 +34,3 @@ class TestValidateProjectName:
 
     def test_valid_ending_number_name(self):
         validate_project_name("test-name2")
-
-
-# Integration Test
