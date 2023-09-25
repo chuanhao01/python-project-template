@@ -20,7 +20,7 @@ poetry-remove:
 install:
 	poetry lock -n && poetry export --without-hashes > requirements.txt
 	poetry install -n
-	-poetry run mypy --install-types --non-interactive hooks tests
+	poetry run mypy --install-types --non-interactive hooks tests
 
 .PHONY: pre-commit-install
 pre-commit-install:
@@ -32,25 +32,29 @@ format:
 	poetry run black --config pyproject.toml $(CODEDIRS)
 
 #* Linting
-.PHONY: lint
-lint:
+.PHONY: ruff
+ruff:
+	poetry run ruff check $(CODEDIRS)
+
+.PHONY: ruff-fix
+ruff-fix:
 	poetry run ruff check --fix $(CODEDIRS)
+
+.PHONY: mypy
+mypy:
+	poetry run mypy --config-file pyproject.toml $(CODEDIRS)
+
+.PHONY: lint
+lint: ruff-fix mypy
+
+.PHONY: check-lint
+check-lint: ruff mypy
 
 #* Testing
 .PHONY: test
 test:
-	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=hooks tests/
+	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=$(CODEDIRS)
 	poetry run coverage-badge -o assets/images/coverage.svg -f
-
-.PHONY: check-codestyle
-check-codestyle:
-	poetry run isort --diff --check-only --settings-path pyproject.toml hooks tests
-	poetry run black --diff --check --config pyproject.toml hooks tests
-	poetry run darglint --verbosity 2 hooks tests
-
-.PHONY: mypy
-mypy:
-	poetry run mypy --config-file pyproject.toml hooks tests
 
 .PHONY: check-safety
 check-safety:
