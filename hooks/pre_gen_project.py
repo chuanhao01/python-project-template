@@ -1,4 +1,4 @@
-"""This module is called before project is created."""
+"""Module is called before project is created."""
 
 import re
 import sys
@@ -14,9 +14,11 @@ def validate_project_name(project_name: str) -> None:
     Followed by any lowercase letters, numbers hypens or underscores.
 
     Args:
+    ----
         project_name: current project name
 
     Raises:
+    ------
         ValueError: If project_name is not a valid Python module name
     """
     module_regex = re.compile(r"^([a-z]|[a-z][a-z0-9_-]*[a-z0-9])$")
@@ -29,17 +31,21 @@ def validate_line_length(line_length: int) -> None:
     """Validate line_length parameter. Length should be between 50 and 300.
 
     Args:
+    ----
         line_length: integer paramenter for isort and black formatters
 
     Raises:
+    ------
         ValueError: If line_length isn't between 50 and 300
     """
-    if not 50 <= line_length <= 300:
+    MIN_LINE_LENGTH = 50
+    MAX_LINE_LENGTH = 300
+    if not MIN_LINE_LENGTH <= line_length <= MAX_LINE_LENGTH:
         message = f"ERROR: line_length must be between 50 and 300. Got `{line_length}`."
         raise ValueError(message)
 
 
-def main() -> None:
+def main() -> None:  # noqa: D103
     try:
         validate_project_name(project_name=PROJECT_NAME)
         validate_line_length(line_length=int(LINE_LENGTH_PARAMETER))

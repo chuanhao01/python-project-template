@@ -1,4 +1,4 @@
-"""This module is called after project is created."""
+"""Module is called after project is created."""
 
 import subprocess
 import textwrap
@@ -21,6 +21,7 @@ def generate_license(project_path: Path, licence: str) -> None:
     """Generate license file for the project.
 
     Args:
+    ----
         project_path: path to the project root directory
         licence: chosen licence
     """
@@ -45,9 +46,10 @@ def generate_pyproject(
     author_name: str,
     author_email: str,
 ) -> None:
-    """Cleans up and removes the _template folder
+    """Generate pyproject.toml.
 
     Args:
+    ----
         project_path: path to the project root directory
     """
     # Create pyproject.toml
@@ -79,18 +81,15 @@ def generate_pyproject(
             "add",
             "-G",
             "dev",
+            "ruff@latest",
             "mypy@latest",
             "mypy-extensions@latest",
-            "pylint@latest",
-            "isort[colors]@latest",
-            "pydocstyle@latest",
             "coverage@latest",
             "coverage-badge@latest",
             "pytest@latest",
             "pytest-html@latest",
             "pytest-cov@latest",
             "bandit@latest",
-            "pyupgrade@latest",
             "pre-commit@latest",
             "-n",
         ],
@@ -123,9 +122,10 @@ def generate_pyproject(
 
 
 def clean_up_template(project_path: Path) -> None:
-    """Cleans up and removes the _template folder
+    """Clean up and remove the _template folder.
 
     Args:
+    ----
         project_path: path to the project root directory
     """
     rmtree((project_path / "_template").as_posix())
@@ -135,6 +135,7 @@ def print_futher_instuctions(project_name: str) -> None:
     """Show user what to do next after project creation.
 
     Args:
+    ----
         project_name: current project name
     """
     message = f"""
@@ -161,7 +162,7 @@ def print_futher_instuctions(project_name: str) -> None:
     print(textwrap.dedent(message))
 
 
-def main() -> None:
+def main() -> None:  # noqa: D103
     generate_license(PROJECT_PATH, LICENSE)
     generate_pyproject(
         PROJECT_PATH,
