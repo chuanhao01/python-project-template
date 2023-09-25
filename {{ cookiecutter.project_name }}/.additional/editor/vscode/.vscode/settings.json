@@ -8,7 +8,6 @@
   },
   // --- Python
   // Ran with the python interpreter
-  "python.formatting.provider": "none",
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
@@ -20,17 +19,12 @@
   },
   // Black
   "black-formatter.importStrategy": "fromEnvironment",
-  // Pylint
-  "pylint.importStrategy": "fromEnvironment",
-  "pylint.severity": {
-    "convention": "Warning",
-    "refactor": "Warning"
-  },
   // Mypy
   "mypy-type-checker.importStrategy": "fromEnvironment",
   "mypy-type-checker.severity": {
     "note": "Warning"
   },
-  // isort
-  "isort.importStrategy": "fromEnvironment"
+  // Ruff
+  "ruff.importStrategy": "fromEnvironment",
+  "ruff.run": "onSave"
 }
