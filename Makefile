@@ -4,6 +4,8 @@ PYTHON := python
 PYTHONPATH := `pwd`
 PYTHONVERSION := py311
 
+CODEDIRS := hooks tests
+
 #* Poetry
 .PHONY: poetry-download
 poetry-download:
@@ -24,17 +26,17 @@ install:
 pre-commit-install:
 	poetry run pre-commit install
 
-#* Formatters
-.PHONY: codestyle
-codestyle:
-	poetry run pyupgrade --exit-zero-even-if-changed --$(PYTHONVERSION)-plus **/*.py
-	poetry run isort --settings-path pyproject.toml hooks tests
-	poetry run black --config pyproject.toml hooks tests
-
-.PHONY: formatting
-formatting: codestyle
+#* Format
+.PHONY: format
+format:
+	poetry run black --config pyproject.toml $(CODEDIRS)
 
 #* Linting
+.PHONY: lint
+lint:
+	poetry run ruff check --fix $(CODEDIRS)
+
+#* Testing
 .PHONY: test
 test:
 	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=hooks tests/
@@ -56,8 +58,6 @@ check-safety:
 	poetry run safety check --full-report
 	poetry run bandit -ll --recursive hooks
 
-.PHONY: lint
-lint: test check-codestyle mypy check-safety
 
 .PHONY: update-dev-deps
 update-dev-deps:
