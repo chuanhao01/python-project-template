@@ -4,7 +4,31 @@ PYTHON := python
 PYTHONPATH := `pwd`
 PYTHONVERSION := py311
 
-CODEDIRS := hooks tests
+SRCDIRS := hooks
+TESTDIRS := tests
+ALLDIRS := hooks tests
+
+# Help Commands
+.PHONY: default
+default: help
+
+.PHONY: help
+help:
+	@echo 'Usage: make [command]'
+	@echo ''
+	@echo 'poetry-download      - Download and install poetry using the curl script'
+	@echo 'poetry-remove        - Remove poetry using the curl script'
+	@echo '----------------------------------------'
+	@echo 'setup                - Setup the venv based on pyenv version'
+	@echo 'install              - Run setup and install-only'
+	@echo 'pre-commit-install   - Install pre-commit hooks (Using the install poetry package)'
+	@echo 'lint                 - Run ruff --fix and mypy'
+	@echo 'check-lint           - Run ruff, mypy and bandit'
+	@echo 'test                 - Run tests'
+	@echo 'check-code           - Run lint and test'
+	@echo '----------------------------------------'
+	@echo 'cleanup              - Clean up any pycache, mypy, ipynb, pytest artifacts'
+	@echo 'build-remove         - Delete build folder'
 
 #* Poetry
 .PHONY: poetry-download
@@ -18,6 +42,7 @@ poetry-remove:
 #* Installation
 .PHONY: install
 install:
+	python -m venv .venv
 	poetry lock -n && poetry export --without-hashes > requirements.txt
 	poetry install -n
 	poetry run mypy --install-types --non-interactive hooks tests
@@ -29,39 +54,41 @@ pre-commit-install:
 #* Format
 .PHONY: format
 format:
-	poetry run black --config pyproject.toml $(CODEDIRS)
+	poetry run black --config pyproject.toml $(ALLDIRS)
 
 #* Linting
 .PHONY: ruff
 ruff:
-	poetry run ruff check $(CODEDIRS)
+	poetry run ruff check $(ALLDIRS)
 
 .PHONY: ruff-fix
 ruff-fix:
-	poetry run ruff check --fix $(CODEDIRS)
+	poetry run ruff check --fix $(ALLDIRS)
 
 .PHONY: mypy
 mypy:
-	poetry run mypy --config-file pyproject.toml $(CODEDIRS)
+	poetry run mypy --config-file pyproject.toml $(ALLDIRS)
 
 .PHONY: lint
 lint: ruff-fix mypy
 
+.PHONY: check-safety
+check-safety:
+	poetry check
+	poetry run bandit -ll --recursive $(ALLDIRS)
+
 .PHONY: check-lint
-check-lint: ruff mypy
+check-lint: ruff mypy check-safety
 
 #* Testing
 .PHONY: test
 test:
-	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=$(CODEDIRS)
+	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=$(ALLDIRS)
 	poetry run coverage-badge -o assets/images/coverage.svg -f
 
-.PHONY: check-safety
-check-safety:
-	poetry check
-	poetry run safety check --full-report
-	poetry run bandit -ll --recursive hooks
-
+#* Check Code
+.PHONY: check-code
+check-code: check-lint test
 
 .PHONY: update-dev-deps
 update-dev-deps:
