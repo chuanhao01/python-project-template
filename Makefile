@@ -4,8 +4,6 @@ PYTHON := python
 PYTHONPATH := `pwd`
 PYTHONVERSION := py311
 
-SRCDIRS := hooks
-TESTDIRS := tests
 ALLDIRS := hooks tests
 
 # Help Commands
