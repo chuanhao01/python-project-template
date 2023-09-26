@@ -50,6 +50,8 @@ target-version = "py311"
 "tests/*.py" = [
   # Pydocstring
   "D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", # Ignore missing docstring
+  # Pylint
+  "PLR2004", # Magic Values
 ]
 
 
