@@ -170,6 +170,7 @@ def main() -> None:  # noqa: D103
         AUTHOR_EMAIL,
     )
     clean_up_template(PROJECT_PATH)
+    print_futher_instuctions(PROJECT_NAME)
 
 
 # Ran by the cookiecutter script
