@@ -154,10 +154,6 @@ def print_futher_instuctions(project_name: str) -> None:
         $ make install
         $ make pre-commit-install
 
-    4) Run codestyle:
-
-        $ make codestyle
-
     """
     print(textwrap.dedent(message))
 

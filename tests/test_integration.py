@@ -1,3 +1,8 @@
+"""Integration tests for running the whole cookiecutter project generator.
+
+Runs the whole pipeline with hooks and the template directory files.
+"""
+
 from pathlib import Path
 
 import pytest
