@@ -1,6 +1,6 @@
 import pytest
 
-from hooks.pre_gen_project import validate_project_name
+from hooks.pre_gen_project import validate_line_length, validate_project_name
 
 
 # Unit Test
@@ -34,3 +34,17 @@ class TestValidateProjectName:
 
     def test_valid_ending_number_name(self):
         validate_project_name("test-name2")
+
+
+class TestValidateLineLength:
+    def test_invalid_line_length_lt(self):
+        with pytest.raises(ValueError):
+            validate_line_length(49)
+
+    def test_invalid_line_length_gt(self):
+        with pytest.raises(ValueError):
+            validate_line_length(400)
+
+    def test_valid_line_length(self):
+        validate_line_length(88)
+        validate_line_length(100)
