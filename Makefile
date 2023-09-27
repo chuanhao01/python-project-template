@@ -90,7 +90,7 @@ check-code: check-lint test
 
 .PHONY: update-dev-deps
 update-dev-deps:
-	poetry add -G dev bandit@latest darglint@latest "isort[colors]@latest" mypy@latest pre-commit@latest pydocstyle@latest pylint@latest pytest@latest pyupgrade@latest safety@latest coverage@latest coverage-badge@latest pytest-html@latest pytest-cov@latest
+	poetry add -G dev bandit@latest mypy@latest pre-commit@latest pytest@latest coverage@latest coverage-badge@latest pytest-html@latest pytest-cov@latest ruff@latest
 	poetry add -G dev --allow-prereleases black@latest
 
 #* Cleaning
