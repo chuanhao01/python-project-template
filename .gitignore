@@ -6,6 +6,10 @@
 # Make sure to include .additional
 !.additional/**/*
 
+# Don't include requirements and poetry.lock
+poetry.lock
+requirements.txt
+
 # --- Python gitignore
 # Byte-compiled / optimized / DLL files
 __pycache__/

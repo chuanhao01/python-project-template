@@ -14,27 +14,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: pyupgrade
-        name: pyupgrade
-        entry: poetry run pyupgrade --py311-plus
-        exclude: ^{{ cookiecutter.project_name }}/
-        types: [python]
-        language: system
-
-  - repo: local
-    hooks:
-      - id: isort
-        name: isort
-        entry: poetry run isort --settings-path pyproject.toml
-        exclude: ^{{ cookiecutter.project_name }}/
-        types: [python]
-        language: system
-
-  - repo: local
-    hooks:
-      - id: black
-        name: black
-        entry: poetry run black --config pyproject.toml
+      - id: check-code
+        name: check-code
+        entry: make check-code
         exclude: ^{{ cookiecutter.project_name }}/
         types: [python]
         language: system

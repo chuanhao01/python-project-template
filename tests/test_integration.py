@@ -1,3 +1,8 @@
+"""Integration tests for running the whole cookiecutter project generator.
+
+Runs the whole pipeline with hooks and the template directory files.
+"""
+
 from pathlib import Path
 
 import pytest
@@ -6,7 +11,7 @@ from cookiecutter.main import cookiecutter
 
 
 class TestCookiecutterGeneration:
-    def test_valid_project(self, tmp_path: Path) -> None:
+    def test_valid_project(self, tmp_path: Path, capfd: pytest.CaptureFixture[str]) -> None:
         cookiecutter(
             template=Path.cwd().absolute().as_posix(),
             no_input=True,
@@ -36,7 +41,11 @@ class TestCookiecutterGeneration:
         # _template folder cleaned up
         assert not (project_folder_path / "_template").exists()
 
-    def test_invalid_project(self, tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
+        # printing of further instructions is done
+        capture = capfd.readouterr()
+        assert "Your project valid-project-name is created." in capture.out
+
+    def test_invalid_project(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
         with pytest.raises(FailedHookException):
             cookiecutter(
                 template=Path.cwd().absolute().as_posix(),
