@@ -50,8 +50,8 @@ def test_generate_pyproject(tmp_path: Path, mocker: MockerFixture, template_path
     # Setting up pyproject templte files
     template_pyproject_path = template_path / "pyproject"
     template_pyproject_path.mkdir(parents=True)
-    with open(template_pyproject_path / "pylint.toml", "w+", encoding="utf-8") as pylint_file:
-        pylint_file.write("pylint")
+    with open(template_pyproject_path / "ruff.toml", "w+", encoding="utf-8") as ruff_file:
+        ruff_file.write("ruff")
     with open(template_pyproject_path / "black.toml", "w+", encoding="utf-8") as black_file:
         black_file.write("black")
     with open(template_pyproject_path / "mypy.toml", "w+", encoding="utf-8") as mypy_file:
@@ -73,7 +73,7 @@ def test_generate_pyproject(tmp_path: Path, mocker: MockerFixture, template_path
 
     assert subprocess_mock.call_count == 3
     with open(tmp_path / "pyproject.toml", encoding="utf-8") as pyproject_file:
-        assert pyproject_file.read() == """pyproject\npylint\nblack\nmypy\npytest\ncoverage\n"""
+        assert pyproject_file.read() == """pyproject\nruff\nblack\nmypy\npytest\ncoverage\n"""
 
 
 def test_clean_up_template(tmp_path: Path, template_path: Path) -> None:

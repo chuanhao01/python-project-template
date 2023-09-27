@@ -31,7 +31,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 select = ["F", "E", "W", "I", "D", "UP", "PL"]
-# For Pylint
 ignore = [
   # Pylint
   "PLR0913", # Too many params

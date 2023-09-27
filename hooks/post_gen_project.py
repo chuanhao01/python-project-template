@@ -102,8 +102,8 @@ def generate_pyproject(
         pyproject_file.write("\n")
 
         pyproject_template_path = project_path / "_template" / "pyproject"
-        with open(pyproject_template_path / "pylint.toml", encoding="UTF-8") as pylint_file:
-            pyproject_file.write(pylint_file.read())
+        with open(pyproject_template_path / "ruff.toml", encoding="UTF-8") as ruff_file:
+            pyproject_file.write(ruff_file.read())
             pyproject_file.write("\n")
 
         with open(pyproject_template_path / "black.toml", encoding="UTF-8") as black_file:
