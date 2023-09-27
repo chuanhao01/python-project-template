@@ -73,7 +73,8 @@ def generate_pyproject(
     )
     # Adding dev packages
     subprocess.run(
-        ["poetry", "add", "-G", "dev", "--allow-prereleases", "black@latest", "-n"], check=True
+        ["poetry", "add", "-G", "dev", "--allow-prereleases", "black@latest", "-n", "--lock"],
+        check=True,
     )
     subprocess.run(
         [
@@ -92,6 +93,7 @@ def generate_pyproject(
             "bandit@latest",
             "pre-commit@latest",
             "-n",
+            "--lock",
         ],
         check=True,
     )
