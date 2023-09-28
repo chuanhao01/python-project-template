@@ -143,7 +143,7 @@ def print_futher_instuctions(project_name: str) -> None:
     message = f"""
     Your project {project_name} is created.
 
-    1) Now you can start working on it:
+    1) Initalize `git` inside your repo
 
         $ cd {project_name} && git init
 
@@ -156,6 +156,13 @@ def print_futher_instuctions(project_name: str) -> None:
         $ make install
         $ make pre-commit-install
 
+    4) To see additionl commands
+
+        $ make
+
+    -----------------------------
+
+    Do look into the `.addtional` folder for more platform specific templates.
     """
     print(textwrap.dedent(message))
 
