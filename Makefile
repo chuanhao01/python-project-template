@@ -27,6 +27,8 @@ help:
 	@echo '----------------------------------------'
 	@echo 'cleanup              - Clean up any pycache, mypy, ipynb, pytest artifacts'
 	@echo 'build-remove         - Delete build folder'
+	@echo '----------------------------------------'
+	@echo 'test-gen             - Generate a test python project with the current template'
 
 #* Poetry
 .PHONY: poetry-download
@@ -120,3 +122,16 @@ build-remove:
 
 .PHONY: cleanup
 cleanup: pycache-remove dsstore-remove mypycache-remove ipynbcheckpoints-remove pytestcache-remove
+
+#* Test Gen
+.PHONY: test-gen
+test-gen:
+	rm -rf ./test-python-project
+	poetry run cookiecutter --no-input ./ \
+	project_name="test-python-project"   \
+	project_description="Test python project description" \
+	license="MIT"                        \
+	python_version="3.11"                \
+	author_name="test author"            \
+	author_email="test_author@test.com"  \
+	line_length=100

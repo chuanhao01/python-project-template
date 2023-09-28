@@ -10,6 +10,9 @@
 poetry.lock
 requirements.txt
 
+# Don't include test generated python project
+test-python-project/
+
 # --- Python gitignore
 # Byte-compiled / optimized / DLL files
 __pycache__/
