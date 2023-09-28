@@ -17,6 +17,7 @@ install-copy:
 
 .PHONY: help
 help:
+	@echo 'PLEASE READ THE README.md before running any commands'
 	@echo 'Usage: make [command]'
 	@echo 'install - Install configs using hard symlinks'
 	@echo 'install-copy - Install configs by copying files'
