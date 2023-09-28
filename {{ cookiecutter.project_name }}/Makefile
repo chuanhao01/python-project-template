@@ -81,7 +81,6 @@ check-lint: ruff mypy check-safety
 .PHONY: test
 test:
 	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=$(ALLDIRS)
-	poetry run coverage-badge -o assets/images/coverage.svg -f
 
 #* Check Code
 .PHONY: check-code
@@ -89,7 +88,7 @@ check-code: check-lint test
 
 .PHONY: update-dev-deps
 update-dev-deps:
-	poetry add -G dev bandit@latest mypy@latest pre-commit@latest pytest@latest coverage@latest coverage-badge@latest pytest-html@latest pytest-cov@latest ruff@latest
+	poetry add -G dev bandit@latest mypy@latest pre-commit@latest pytest@latest coverage@latest pytest-html@latest pytest-cov@latest ruff@latest
 	poetry add -G dev --allow-prereleases black@latest
 
 #* Cleaning

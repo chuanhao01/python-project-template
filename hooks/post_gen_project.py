@@ -86,7 +86,6 @@ def generate_pyproject(
             "mypy@latest",
             "mypy-extensions@latest",
             "coverage@latest",
-            "coverage-badge@latest",
             "pytest@latest",
             "pytest-html@latest",
             "pytest-cov@latest",
