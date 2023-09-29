@@ -1,0 +1,22 @@
+default_language_version:
+  python: python3.11
+
+default_stages: [commit, push]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+      - id: check-yaml
+        exclude: ^{{ cookiecutter.project_name }}/.github/
+      - id: end-of-file-fixer
+        exclude: LICENSE
+
+  - repo: local
+    hooks:
+      - id: check-code
+        name: check-code
+        entry: make check-code
+        exclude: ^{{ cookiecutter.project_name }}/
+        types: [python]
+        language: system
