@@ -71,9 +71,9 @@ def test_generate_pyproject(tmp_path: Path, mocker: MockerFixture, template_path
         "test_author@test.com",
     )
 
-    assert subprocess_mock.call_count == 3
+    assert subprocess_mock.call_count == 2
     with open(tmp_path / "pyproject.toml", encoding="utf-8") as pyproject_file:
-        assert pyproject_file.read() == """pyproject\nruff\nblack\nmypy\npytest\ncoverage\n"""
+        assert pyproject_file.read() == """pyproject\nruff\nmypy\npytest\ncoverage\n"""
 
 
 def test_clean_up_template(tmp_path: Path, template_path: Path) -> None:

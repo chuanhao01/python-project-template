@@ -8,11 +8,11 @@ ignore = [
   "D417" # Docstring for every param
 ]
 fixable = ["ALL"]
-
-# Needs to match with black
 line-length = {{ cookiecutter.line_length }}
-
 target-version = "py{{ cookiecutter.python_version.replace('.', '') }}"
+
+[tool.ruff.format]
+exclude = [".git", ".hg", ".mypy_cache", ".tox", ".venv", "_build", "buck-out", "build", "dist", "end", "venv"]
 
 [tool.ruff.per-file-ignores]
 "**/*/__init__.py" = ["D104"] # Ignore requiring docstring in empty __init__.py

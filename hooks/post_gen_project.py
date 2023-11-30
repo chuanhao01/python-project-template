@@ -73,10 +73,6 @@ def generate_pyproject(
     )
     # Adding dev packages
     subprocess.run(
-        ["poetry", "add", "-G", "dev", "--allow-prereleases", "black@latest", "-n", "--lock"],
-        check=True,
-    )
-    subprocess.run(
         [
             "poetry",
             "add",
@@ -103,10 +99,6 @@ def generate_pyproject(
         pyproject_template_path = project_path / "_template" / "pyproject"
         with open(pyproject_template_path / "ruff.toml", encoding="UTF-8") as ruff_file:
             pyproject_file.write(ruff_file.read())
-            pyproject_file.write("\n")
-
-        with open(pyproject_template_path / "black.toml", encoding="UTF-8") as black_file:
-            pyproject_file.write(black_file.read())
             pyproject_file.write("\n")
 
         with open(pyproject_template_path / "mypy.toml", encoding="UTF-8") as mypy_file:
