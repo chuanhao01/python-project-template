@@ -27,6 +27,8 @@ help:
 	@echo 'cleanup              - Clean up any pycache, mypy, ipynb, pytest artifacts'
 	@echo 'build-remove         - Delete build folder'
 	@echo '----------------------------------------'
+	@echo 'show-outdated        - Shows the outdated packages in poetry (Use add package@latest to update)'
+	@echo '----------------------------------------'
 	@echo 'test-gen             - Generate a test python project with the current template'
 
 #* Poetry
@@ -115,6 +117,11 @@ build-remove:
 
 .PHONY: cleanup
 cleanup: pycache-remove dsstore-remove mypycache-remove ipynbcheckpoints-remove pytestcache-remove
+
+#* Utility Commands
+.PHONY: show-outdated
+show-outdated:
+	poetry show --outdated
 
 #* Test Gen
 .PHONY: test-gen
