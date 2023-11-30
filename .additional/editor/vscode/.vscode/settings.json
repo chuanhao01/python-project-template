@@ -14,21 +14,20 @@
   // Ran with the python interpreter
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.codeActionsOnSave": {
       "source.fixAll": true,
       "source.organizeImports": true
     },
     "editor.rulers": [100]
   },
-  // Black
-  "black-formatter.importStrategy": "fromEnvironment",
   // Mypy
   "mypy-type-checker.importStrategy": "fromEnvironment",
   "mypy-type-checker.severity": {
     "note": "Warning"
   },
   // Ruff
-  "ruff.importStrategy": "fromEnvironment",
-  "ruff.run": "onSave"
+  "ruff.importStrategy": "fromEnvironment"
+  // Using default Formatter and codeActionOnSave as above
+  // "ruff.lint.run": "onSave"
 }
