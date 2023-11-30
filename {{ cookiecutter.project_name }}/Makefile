@@ -86,11 +86,6 @@ test:
 .PHONY: check-code
 check-code: check-lint test
 
-.PHONY: update-dev-deps
-update-dev-deps:
-	poetry add -G dev bandit@latest mypy@latest pre-commit@latest pytest@latest coverage@latest pytest-html@latest pytest-cov@latest ruff@latest
-	poetry add -G dev --allow-prereleases black@latest
-
 #* Cleaning
 .PHONY: pycache-remove
 pycache-remove:
